@@ -1,0 +1,478 @@
+.material-switch {
+    padding: 10px 0 20px;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch > label.label-success {
+    background: #05CB95;
+}
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+.material-switch{
+    padding: 10px 0 20px;
+}
+
+.material-switch > input[type="checkbox"] {
+    display: none;
+}
+
+.material-switch > label {
+    cursor: pointer;
+    height: 0px;
+    position: relative;
+    width: 40px;
+}
+
+.material-switch > label::before {
+    background: rgb(0, 0, 0);
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    content: '';
+    height: 16px;
+    left: -2px;
+    margin-top: -8px;
+    position:absolute;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
+    width: 60px;
+}
+.material-switch > label::after {
+    background: rgb(255, 255, 255);
+    border-radius: 16px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    content: '';
+    height: 24px;
+    left: -4px;
+    margin-top: -8px;
+    position: absolute;
+    top: -4px;
+    transition: all 0.3s ease-in-out;
+    width: 24px;
+}
+.material-switch > input[type="checkbox"]:checked + label::before {
+    background: inherit;
+    opacity: 0.5;
+}
+.material-switch > input[type="checkbox"]:checked + label::after {
+    background: inherit;
+    left: 40px;
+}
+
+.material-switch span{
+    font-family: 'Varela Round', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    position: relative;
+    left: 25px;
+    color: #fff;
+}
+
+.material-switch > label.label-success{
+    background: #05CB95;
+}
+
+/* code for animated blinking cursor */
+.typed-cursor{
+    opacity: 1;
+    font-weight: 100;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    -ms-animation: blink 0.7s infinite;
+    -o-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+
+/* for the pop up chat*/
+@media only screen and (max-width : 540px)
+{
+    .chat-sidebar
+    {
+        display: none !important;
+    }
+
+    .chat-popup
+    {
+        display: none !important;
+    }
+}
+
+.sidebar-name
+{
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.sidebar-name span
+{
+    padding-left: 5px;
+}
+
+.sidebar-name a
+{
+    display: block;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar-name:hover
+{
+    background-color:#e1e2e5;
+}
+
+.sidebar-name img
+{
+    width: 32px;
+    height: 32px;
+    vertical-align:middle;
+}
+
+.popup-box
+{
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    right: 220px;
+    height: 285px;
+    background-color: rgb(237, 239, 244);
+    width: 300px;
+    border: 1px solid rgba(29, 49, 91, .3);
+}
+
+.popup-box .popup-head
+{
+    background-color: #6d84b4;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    clear: both;
+}
+
+.popup-box .popup-head .popup-head-left
+{
+    float: left;
+}
+
+.popup-box .popup-head .popup-head-right
+{
+    float: right;
+    opacity: 0.5;
+}
+
+.popup-box .popup-head .popup-head-right a
+{
+    text-decoration: none;
+    color: inherit;
+}
+
+.popup-box .popup-messages
+{
+    height: 100%;
+    overflow-y: scroll;
+}
+
+/*content pop up*/
+
+.chat-box
+{
+    width: 300px;
+}
+
+.header
+{
+    padding: 10px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: white;
+}
+
+.messages
+{
+    padding: 10px;
+    height: 200px;
+    background-color: green;
+    background-color: rgb(237, 239, 244);
+    overflow: auto;
+}
+
+.messages ul
+{
+    padding: 0px;
+    list-style-type: none;
+}
+
+.messages ul li
+{
+    height: auto;
+    margin-bottom: 10px;
+    clear: both;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.messages ul li span
+{
+    display: inline-block;
+    max-width: 200px;
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+    position: relative;
+
+}
+
+.messages ul li span.left
+{
+    float: left;
+}
+
+.messages ul li span.left:after
+{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: -8.5px;
+    top: 7px;
+    height: 0px;
+    width: 0px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid white;
+}
+
+.messages ul li span.left:before
+{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    left: -9px;
+    top: 7px;
+    height: 0px;
+    width: 0px;
+}
+
+
+
+.messages ul li span.right:before
+{
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -7px;
+    top: 6px;
+    height: 0px;
+    width: 0px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #4080ff;
+}
+
+.messages ul li span.right
+{
+    float: right;
+    background-color: #4080ff;
+}
+
+.clear
+{
+    clear: both;
+}
+
+.input-box
+{
+    background-color: white;
+    height: 50px;
+    padding: 0px;
+}
+
+.input-box textarea
+{
+    padding: 0px;
+    width: 278px;
+    height: 100%;
+    display: inline-block;
+    outline: 0px;
+    border-width: 0px;
+    resize: none;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    font-size: 12px;
+    padding: 10px;
+    border-top-width: 0px;
+}
+
+
+
+/*input form pop up*/
+input
+{
+    display:block;
+    margin:0px auto 15px;
+    border-radius:5px;
+    background: #333333;
+    width:85%;
+    padding:12px 20px 12px 10px;
+    border:none;
+    color:#929999;
+    box-shadow:inset 0px 1px 5px #272727;
+    font-size:0.8em;
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+}
+
+input:focus
+{
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+    box-shadow: 0px 0px 5px 1px #161718;
+}
+
+*:focus{outline:none;}
+::-webkit-input-placeholder {
+    color:#929999;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    color:#929999;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color:#929999;
+}
+
+:-ms-input-placeholder {
+    color:#929999;
+}
+
+h1
+{
+    text-align:center;
+    color:#fff;
+    font-size:13px;
+    padding:12px 0px;
+}
+
+#note
+{
+    color:#88887a;
+    font-size: 0.8em;
+    text-align:left;
+    padding-left:5px;
+}
+
+#facebook
+{
+    text-align:center;
+    float:left;
+    background:#365195;
+    padding:35px 10px 20px 10px;
+    width:170px;
+    height:228px;
+    border-radius:3px;
+    cursor:pointer;
+    box-shadow: 0px 0px 10px 2px #161718;
+    margin-right:10px;
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+}
+
+#facebook:hover
+{
+    box-shadow: 0px 0px 0px 0px #161718;
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+}
+
+.fa-facebook
+{
+    color:#fff;
+    font-size:7em;
+    display:block;
+}
+.fa-facebook-f:before, .fa-facebook:before {
+    font-size:70px;
+}
+a
+{
+    color:#88887a;
+    text-decoration:none;
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+}
+
+a:hover
+{
+    color:#fff;
+    margin-left:5px;
+    -webkit-transition:0.5s ease;
+    -moz-transition:0.5s ease;
+    -o-transition:0.5s ease;
+    -ms-transition:0.5s ease;
+    transition:0.5s ease;
+}
+
+#mainlogin
+{
+    float:left;
+    width:250px;
+    height:228px;
+    padding:10px 15px;
+    position:relative;
+    background:#555555;
+    border-radius:3px;
+}
+
+#connect
+{
+    font-weight: bold;
+    color: #fff;
+    font-size: 13px;
+    text-align: left;
+    font-family: verdana;
+    padding-top:10px;
+}
+
+#or
+{
+    position:absolute;
+    left: -25px;
+    top: 10px;
+    background:#222222;
+    text-shadow:0 2px 0px #121212;
+    color:#999999;
+    width:40px;
+    height:40px;
+    text-align:center;
+    border-radius:50%;
+    font-weight:bold;
+    line-height:38px;
+    font-size: 13px;
+}
