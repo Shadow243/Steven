@@ -6,15 +6,17 @@ use App\Models\Comments;
 use App\Models\Post;
 //use App\Treits\freindable;
 use App\Models\Profil;
+use App\traits\UsersOnlineTrait;
+use Cmgmyr\Messenger\Models\Thread;
+use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Notifications\Notifiable;
 use Hootlex\Friendships\Traits\Friendable;
-use \HighIdeas\UsersOnline\Traits\UsersOnlineTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kim\Activity\Activity;
 
 class User extends Authenticatable
 {
-    use Notifiable, Friendable, UsersOnlineTrait;
+    use Notifiable, Friendable, UsersOnlineTrait,Messagable;
 
     //use freindable;
 
@@ -70,6 +72,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comments::class);
     }
+
+    /**
+     * threads's relationship.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+//    public function threads()
+//     {
+//         return $this->hasMany(Thread::class);
+//     }
 
 
     /**

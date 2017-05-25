@@ -21,10 +21,9 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends BaseController
 {
 
-    private $views;
     public function __construct(ViewFac $views)
     {
-        parent::__construct();
+        parent::__construct($views);
         $this->views = $views;
     }
 

@@ -18,6 +18,7 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            flashy()->success('Welcome Back'.Auth::user()->name, 'http://your-awesome-link.com');
             return redirect('/home');
         }
 

@@ -1,4 +1,4 @@
-<footer class="welcome-footer">
+<footer class="welcome-footer" style="position: fixed;right: 0;left: 0;">
     <div class="container">
         <p>
         </p><div class="footer-links">

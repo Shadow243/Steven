@@ -12,10 +12,6 @@ use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class ProfileController extends BaseController
 {
-    /**
-     * @var ViewFactory
-     */
-    private $views;
 
     /**
      * ProfileController constructor.
@@ -23,7 +19,7 @@ class ProfileController extends BaseController
      */
     public function __construct(ViewFactory $views)
     {
-        parent::__construct();
+        parent::__construct($views);
         $this->views = $views;
     }
 
@@ -104,7 +100,7 @@ class ProfileController extends BaseController
         }
 
         $user->save();
-        //return redirect()->back()->with('success', 'Profil mis en jour');
+      //return redirect()->back()->with('success', 'Profil mis en jour');
 
         return Response::json([
             'msg' => 'Image Profil mis en jour',

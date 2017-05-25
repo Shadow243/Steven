@@ -1,4 +1,5 @@
 @foreach($publications as $posts)
+    @if($authUser->isFriendWith($posts->user) || $posts->user == $authUser)
     <div class="panel panel-white post panel-shadow">
         <div class="post-heading">
             <div class="pull-left image"> <img src="{{ $posts->user->GetPhoto() }}" class="avatar" alt="user profile image"> </div>
@@ -62,4 +63,5 @@
             </form>
         </div>
     </div>
+    @endif
 @endforeach

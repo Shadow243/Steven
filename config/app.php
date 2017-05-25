@@ -178,8 +178,11 @@ return [
         HighIdeas\UsersOnline\UsersOnlineServiceProvider::class,
         HighIdeas\UsersOnline\Providers\UsersOnlineEventServiceProvider::class,
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-        //Cmgmyr\Messenger\MessengerServiceProvider::class,
-       // Zizaco\Entrust\EntrustServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        MercurySeries\Flashy\FlashyServiceProvider::class,
+        //Adaojunior\Passport\SocialGrantServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -242,7 +245,8 @@ return [
         'Chat' => Musonza\Chat\Facades\ChatFacade::class,
         'Activity' => Kim\Activity\ActivityFacade::class,
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
-       // 'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Flashy' => MercurySeries\Flashy\Flashy::class,
 
 
     ],

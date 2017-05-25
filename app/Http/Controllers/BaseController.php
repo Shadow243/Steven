@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\User;
+use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Kim\Activity\Activity;
 use Musonza\Chat\Chat;
 use Musonza\Chat\Conversations\Conversation;
+use Illuminate\Contracts\View\Factory as ViewFactory;
 
 class BaseController extends Controller
 {
+    protected $views;
     /**
      * BaseController constructor.
      */
-    public function __construct()
+    public function __construct(ViewFactory $views)
     {
         $this->middleware('auth');
+        $this->views = $views;
     }
 
     /** sugestion list users randed
@@ -46,6 +50,40 @@ class BaseController extends Controller
         }
     }
 
+    public function loadMessage($userId)
+    {
+//        $conversation = [];
+        $currentUserId = Auth::user()->id;
+        $threads = Thread::Between([$currentUserId, $userId])->latest('created_at')->get();
+//      dd($threads);
+        if ($threads)
+        {
+            foreach ($threads as $key => $thread) {
+                $thread->unread = $thread->isUnread($currentUserId);
+
+                $thread->lastMessage = $thread->latestMessage;
+
+                $participants = $thread->participants()->get();
+
+                foreach ($participants as $key => $participant) {
+                    if ($participant->user->id != Auth::user()->id) {
+                        $thread->user = $participant->user;
+                        break;
+                    }
+                }
+                $thread->conversationMessages = $thread->messages()->orderBy('created_at', 'ASC')->latest()->with('user')->paginate(10);
+
+                foreach ($threads as $cov)
+                {
+                    $threads->messages = $cov->messages;
+                }
+            }
+        }
+//       dd($threads);
+        //return $threads = collect($conversation);
+        return $this->views->make('pages.message.chat', compact('threads'))->render();
+    }
+
     /** from Highdeas And kim
      * @return \Illuminate\Support\Collection
      */
@@ -53,6 +91,7 @@ class BaseController extends Controller
     {
         $users = [];
         $user = Auth::user();
+
 //        $activities = $this->most_recent_activity();
           foreach($user->mostRecentOnline() as $online_user)
         {
@@ -66,8 +105,9 @@ class BaseController extends Controller
                 
             }
 
+        $onlineFriends = collect($users);
 
-        return collect($users);
+        return $this->views->make('pages.partials.online_user', compact('onlineFriends'))->render();
     }
 
 //    public function getPosts()

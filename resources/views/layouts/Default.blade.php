@@ -15,11 +15,9 @@
     <meta name="author" content="Steven Blaise">
     <title>{{ config('app.name') }} | @yield('title')</title>
     <link rel="icon" href="{{ asset('img/favicon.ico') }}">
-    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/timeline.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
+    <link href="{{ mix('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/chatbox.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     {{--<link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
@@ -70,7 +68,7 @@
                                             </form>
                                         </div>
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li><a href="{{ url('/home') }}">{{ auth::user()->name.' ' }}<img src="{{ Auth::user()->GetPhoto() }}" class="img-nav img-circle"></a></li>
+                                            <li><a href="{{ url('/home') }}" class="home_link">{{ auth::user()->name.' ' }}<img src="{{ Auth::user()->GetPhoto() }}" class="img-nav img-circle"></a></li>
                                             <li><a href="{{ url('/home/collectios') }}"><i class="fa fa-home"></i>&nbsp;Home</a></li>
                                             {{--<li><a href="{{ route('Notifications::index') }}"><i class="fa fa-globe"></i></a></li>--}}
                                             <li class="dropdown">
@@ -110,11 +108,16 @@
 
 <div class="container">
     @yield('content')
+
+    <div class="monconteneur">
+        {{--for my chat box (popups)--}}
+    </div>
 </div>
 @if(Auth::check())
     <!-- Online users sidebar content-->
     @include('pages.partials.sidebar')
     <!-- Online users sidebar content-->
+{{--    @include('pages.message.chatbax')--}}
 @endif
 <!--footer -->
 @include('pages.partials.footer')
@@ -126,6 +129,9 @@
 <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/js/notify.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
+
+@include('flashy::message')
 
 @if(Auth::check())
     <script>

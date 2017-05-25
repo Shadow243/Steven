@@ -27,9 +27,10 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'PostController@index');
     Route::get('/user/colections', 'PostController@colections');
-    Route::get('/online-users', 'BaseController@Onle_ajax_alist_freind');
+    Route::get('/online-users', 'BaseController@OnlineFriends');
+    Route::get('/messages/{id}', 'BaseController@loadMessage');
     Route::get('/home/collectios', 'HomeController@DisplayHome');
-
+    Route::get('/chat_box/{id}', 'MessageController@showchatbox');
 
     Route::group(['as' => 'profile::', 'prefix' => 'profile'], function(){
         Route::get('/', ['as'=>'index', 'uses' => 'ProfileController@index']);
@@ -54,10 +55,19 @@ Route::group(['middleware' => 'auth'], function () {
 
     });
 
-    Route::group(['as' => 'Message::', 'prefix' => 'Message'], function(){
-        Route::get('/', ['as'=>'index', 'uses' => 'MessageController@DisplayMessagePage']);
-
+    Route::group(['as' => 'Message::', 'prefix' => 'message'], function(){
+        Route::get('/', ['as'=>'index', 'uses' => 'MessageController@getMessages']);
+//        Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+//        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('show/{id}', ['as' => 'show', 'uses' => 'MessageController@show']);
+//        Route::get('chat_box/', ['as' => 'show::chatbox', 'uses' => 'MessageController@showchatbox']);
+        Route::put('reply/{id}', ['as' => 'messages.update', 'uses' => 'MessageController@update']);
     });
+
+//    Route::group(['prefix' => 'messages'], function () {
+//        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+//    });
+
     Route::group(['as' => 'About::', 'prefix' => 'About'], function(){
         Route::get('/', ['as'=>'index', 'uses' => 'ProfileController@DisplayAboutPage']);
 

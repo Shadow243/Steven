@@ -11,10 +11,6 @@ use Illuminate\Support\Facades\Response;
 class FriendController extends BaseController
 {
     /**
-     * @var ViewFactory
-     */
-    private $views;
-    /**
      * Create a new controller instance.
      *
      * @return void

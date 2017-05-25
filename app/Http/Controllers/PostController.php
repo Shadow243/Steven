@@ -12,11 +12,10 @@ use Illuminate\Support\Facades\Response;
 
 class PostController extends BaseController
 {
-    
-    private $views;
+
     public function __construct(ViewFac $views)
     {
-        parent::__construct();
+        parent::__construct($views);
         $this->views = $views;
     }
 

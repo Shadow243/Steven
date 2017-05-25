@@ -1,12 +1,37 @@
 $(document).ready(function() {
    /*============ Chat sidebar ========*/
-  // $('.chat-sidebar, .nav-controller, .chat-sidebar a').on('click', function(event) {
+  //   $('.chat_head').click(function(){
+  //       $('.chat_body').slideToggle('slow');
+  //   });
+  //   $('.msg_head').click(function(){
+  //       $('.msg_wrap').slideToggle('slow');
+  //   });
+  //
+  //   $('.close').click(function(){
+  //       $('.msg_box').hide();
+  //   });
+  //
+  //   $('a.user').click(function(){
+  //       alert(okok);
+  //       $('.msg_wrap').show();
+  //       $('.msg_box').show();
+  //   });
+  //
+  //   $('textarea').keypress(
+  //       function(e){
+  //           if (e.keyCode == 13) {
+  //               e.preventDefault();
+  //               var msg = $(this).val();
+  //               $(this).val('');
+  //               if(msg!='')
+  //                   $('<div class="msg_b">'+msg+'</div>').insertBefore('.msg_push');
+  //               $('.msg_body').scrollTop($('.msg_body')[0].scrollHeight);
+  //           }
+  //       });
+  //
+  // $(".hide-chat").click(function(){
   //     $('.chat-sidebar').toggleClass('focus');
   // });
-
-  $(".hide-chat").click(function(){
-      $('.chat-sidebar').toggleClass('focus');
-  });
 
     /*============ hover menu ========*/
     var timerIn = 200;
@@ -170,6 +195,7 @@ $(document).ready(function() {
                 $('#avatarModal').modal('hide')
                 $("#image-holder").empty();
                 $('.profile-image').attr('src', data.photo);
+                $('img.img-nav').attr('src', data.photo);
                 $.notify(data.msg, "success");
             },
             error: function (data) {
@@ -260,7 +286,8 @@ $(document).ready(function() {
             var form = $('#form-profil');
             $.notify(data.msg, "success");
             console.log(data.user);
-            $(form).find('.profile-image').attr('src', data.user.photo);
+            //$(form).find('.profile-image').attr('src', data.user.photo);
+            //$('a.home_link').text(data.name);
             ///$(form).find('.cover-image').attr('src', data.user.MurPhoto);
         },
         error: function (data) {
@@ -286,7 +313,7 @@ $(document).ready(function() {
                 
                 var commentForm = '<li class="comment"> \
                         <a class="pull-left" href="#"> \
-                        <img class="avatar" src="img/Friends/guy-3.jpg" alt="avatar"> \
+                        <img class="avatar" src='+ response.comment.user.photo +'  alt="avatar"> \
                         </a> \
                         <div class="comment-body"> \
                             <div class="comment-heading"> \
@@ -377,7 +404,8 @@ $(document).ready(function() {
                 });
             }
         });
-    });  $("a.add-friend_sugestion").on('click', function(e) {
+    });
+    $("a.add-friend_sugestion").on('click', function(e) {
         e.preventDefault();
         var link = $(this);
         var formData = {
@@ -416,31 +444,16 @@ function loadOnlineUsers()
 {
     if(authUserId != null)
     {
-                $.ajax({
+        $.ajax({
         url: '/online-users',
         type: "GET",
+        datatype: 'html',
 
-        success: function(data){
+        success: function(html){
 
             //console.log(data.users)
             //$("#faq-result").append(data);
-            if(data.users.length > 0)
-            {
-                $.each(data.users, function (key, value) {
-                  // console.log(value.id);
-
-                   var html = '<a href="javascript:register_popup('+ value.id +', ' + value.name +');" class="list-group-item">\
-                    <i class="fa fa-check-circle connected-status"></i>\
-                    <img src="' + value.avatar +'" class="img-chat img-thumbnail">\
-                    <span class="chat-user-name">' + value.name +'</span>\
-                </a>\
-                   ';
-
-                   $('div.online-users').html(html);
-                });
-            }else{
-                $('div.online-users').html('<p> Aucun utilisateur en ligne </p>');
-            }
+            $('div.online-users').html(html);
 
         },
         error: function (data) {
@@ -452,7 +465,73 @@ function loadOnlineUsers()
     setTimeout(loadOnlineUsers, 5000);  
     }  
 }
+  // conversation on click displays
+    $("li.conversation").on('click', function(e) {
+        e.preventDefault();
+        var convId = $(this).data('conversationId');
+        var container = $('#chat-message');
+        if(convId != null)
+        {
+            $.ajax({
+                url: '/message/show/' + convId,
+                type: "GET",
+                datatype: 'html',
 
+                success: function(html){
+
+                    $(container).html(html);
+
+                },
+                error: function (data) {
+                    $.each(data.responseJSON, function (key, value) {
+                        $.notify(value, "error");
+                    });
+                }
+            });
+        }
+    });
+
+    $(document).on('click', '.btn-reply', function(e) {
+        e.preventDefault();
+        sendMessage()
+    });
+
+    $(document).on('keyup', '.txt-reply', function(e) {
+
+        if(e.keyCode === 13 && e.shiftKey === false)
+        {
+            sendMessage()
+        }
+
+    });
+
+    function sendMessage()
+    {
+        var form = ('form.reply-form');
+        var msg = $(form).find('.txt-reply');
+        if(msg != '')
+        {
+
+            $.ajax({
+                url: $(form).attr('action'),
+                type: "PUT",
+                data : $(form).serialize(),
+                datatype: 'html',
+
+                success: function(html){
+                    msg.text('')
+                    $('ul.chat').append(html);
+
+                },
+                error: function (data) {
+                    $.each(data.responseJSON, function (key, value) {
+                        $.notify(value, "error");
+                    });
+                }
+            });
+
+        }
+    }
 
  /*============= Accept FreindRequest ===================*/
     // $("a.add-friend").on('click', function(e) {
@@ -481,7 +560,7 @@ function loadOnlineUsers()
     /*============= About scroll page ==============*/
     $(window).on('scroll',function(){
         if($(window).scrollTop()==($(document).height()-$(window).height())) {
-            alert('load other post at last');
+            //alert('load other post at last');
         }
 
         // $.ajax({
